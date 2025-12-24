@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="dependency">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/target/dependency/javafx-fxml-23.jar!/" />
+      <root url="jar://$PROJECT_DIR$/target/dependency/javafx-graphics-23.jar!/" />
+      <root url="jar://$PROJECT_DIR$/target/dependency/javafx-controls-23-win.jar!/" />
+      <root url="jar://$PROJECT_DIR$/target/dependency/javafx-fxml-23-win.jar!/" />
+      <root url="jar://$PROJECT_DIR$/target/dependency/javafx-base-23.jar!/" />
+      <root url="jar://$PROJECT_DIR$/target/dependency/slf4j-api-2.0.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/target/dependency/javafx-base-23-win.jar!/" />
+      <root url="jar://$PROJECT_DIR$/target/dependency/gson-2.10.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/target/dependency/javafx-controls-23.jar!/" />
+      <root url="jar://$PROJECT_DIR$/target/dependency/javafx-graphics-23-win.jar!/" />
+      <root url="jar://$PROJECT_DIR$/target/dependency/slf4j-simple-2.0.9.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

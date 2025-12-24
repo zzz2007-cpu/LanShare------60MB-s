@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="LanShare">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/LanShare.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

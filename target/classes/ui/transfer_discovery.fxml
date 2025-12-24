@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<BorderPane fx:id="root" prefWidth="1000" prefHeight="640" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lanshare.test.ui.TransferDiscoveryController" id="appRoot">
+    <!-- 顶部标题栏：品牌与全局操作 -->
+    <top>
+        <HBox fx:id="paneHeader" styleClass="app-header" spacing="8" alignment="CENTER" BorderPane.alignment="CENTER">
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="📡" style="-fx-font-size: 24px;"/>
+                <Label text="LanShare" styleClass="title"/>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="btnStart" text="启动发现" styleClass="primary-btn"/>
+            <Button fx:id="btnStop" text="停止发现" styleClass="secondary-btn"/>
+            <Button fx:id="btnRefresh" text="刷新广播" styleClass="secondary-btn"/>
+            <CheckBox fx:id="chkLocalServer" text="本机开启接收"/>
+        </HBox>
+    </top>
+
+    <!-- 左侧导航：常用操作入口 -->
+    <left>
+        <VBox fx:id="sideNav" styleClass="side-nav" prefWidth="220" spacing="8">
+            <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+            <Button fx:id="btnConnect" text="建立连接" styleClass="primary-btn" maxWidth="Infinity" prefHeight="40"/>
+            <Button fx:id="btnChoose" text="选择文件" styleClass="primary-btn" maxWidth="Infinity" prefHeight="40"/>
+            <Button fx:id="btnSend" text="发送到选中设备" styleClass="primary-btn" maxWidth="Infinity" prefHeight="40"/>
+            
+            <Region VBox.vgrow="ALWAYS"/>
+            
+            <!-- 文件信息展示区域 -->
+            <StackPane alignment="TOP_RIGHT">
+                <VBox fx:id="fileInfoBox" spacing="10" alignment="CENTER" style="-fx-background-color: #f8f9fa; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #dee2e6; -fx-border-width: 2;" prefHeight="150" maxHeight="150">
+                    <StackPane>
+                        <Label fx:id="lblFileIcon" text="📄" style="-fx-font-size: 64px; -fx-text-fill: #6c757d;" visible="true" managed="true"/>
+                        <ImageView fx:id="imgFileIcon" fitWidth="64" fitHeight="64" preserveRatio="true" visible="false" managed="false"/>
+                    </StackPane>
+                    <Label fx:id="lblFileName" text="未选择文件" style="-fx-font-size: 14px; -fx-text-fill: #6c757d; -fx-font-weight: bold;" wrapText="true" textAlignment="CENTER"/>
+                </VBox>
+                <Button fx:id="btnCancelFile" text="✖" styleClass="secondary-btn, cancel-btn" visible="false">
+                    <StackPane.margin>
+                        <Insets top="8" right="8"/>
+                    </StackPane.margin>
+                </Button>
+            </StackPane>
+            
+            <!-- 目标设备展示区域 -->
+            <StackPane alignment="TOP_RIGHT">
+                <VBox fx:id="targetInfoBox" spacing="10" alignment="CENTER" style="-fx-background-color: #f8f9fa; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #dee2e6; -fx-border-width: 2;" prefHeight="150" maxHeight="150">
+                    <Label fx:id="lblTargetIcon" text="👤" style="-fx-font-size: 64px; -fx-text-fill: #6c757d;"/>
+                    <Label fx:id="lblTargetName" text="未选择设备" style="-fx-font-size: 14px; -fx-text-fill: #6c757d; -fx-font-weight: bold;" wrapText="true" textAlignment="CENTER"/>
+                </VBox>
+                <Button fx:id="btnCancelTarget" text="✖" styleClass="secondary-btn, cancel-btn" visible="false">
+                    <StackPane.margin>
+                        <Insets top="8" right="8"/>
+                    </StackPane.margin>
+                </Button>
+            </StackPane>
+            
+            <Separator/>
+            <Button fx:id="btnSettings" text="⚙ 设置" styleClass="secondary-btn" maxWidth="Infinity" prefHeight="40"/>
+        </VBox>
+    </left>
+
+    <!-- 主操作区域：设备列表 + 传输与日志 -->
+    <center>
+        <GridPane hgap="8" vgap="8">
+            <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+            <columnConstraints>
+                <ColumnConstraints percentWidth="40"/>
+                <ColumnConstraints percentWidth="60"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="ALWAYS"/>
+            </rowConstraints>
+
+            <!-- 已发现设备卡片 -->
+            <VBox GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="card" spacing="8">
+                <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+                <Label text="已发现设备" styleClass="subtitle"/>
+                <ListView fx:id="listDevices" VBox.vgrow="ALWAYS"/>
+            </VBox>
+
+            <!-- 传输与日志卡片 -->
+            <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="card" spacing="8">
+                <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+                <Label text="传输进度" styleClass="subtitle"/>
+                <HBox spacing="8">
+                    <ProgressBar fx:id="progressBar" prefWidth="420"/>
+                    <Label fx:id="lblProgress" text="0%" styleClass="caption"/>
+                </HBox>
+                <HBox spacing="16">
+                    <Label fx:id="lblSpeed" text="速度: --" styleClass="caption"/>
+                    <Label fx:id="lblTimeRemaining" text="剩余时间: --" styleClass="caption"/>
+                </HBox>
+                <HBox spacing="8">
+                    <Button fx:id="btnPause" text="暂停" styleClass="secondary-btn" disable="true"/>
+                    <Button fx:id="btnResume" text="恢复" styleClass="secondary-btn" disable="true"/>
+                    <Button fx:id="btnCancel" text="取消传输" styleClass="secondary-btn" disable="true"/>
+                </HBox>
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="日志" styleClass="subtitle"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="btnClearLog" text="清空日志" styleClass="secondary-btn"/>
+                </HBox>
+                <StackPane VBox.vgrow="ALWAYS" style="-fx-background-color: #f8f9fa; -fx-background-radius: 10; -fx-border-color: #dee2e6; -fx-border-width: 1; -fx-border-radius: 10;">
+                    <padding><Insets top="8" right="8" bottom="8" left="8"/></padding>
+                    <ListView fx:id="listLogs"/>
+                </StackPane>
+            </VBox>
+        </GridPane>
+    </center>
+</BorderPane>
